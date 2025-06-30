@@ -1,5 +1,12 @@
-import streamlit as st
-from openai import OpenAI
+import os
+import openai
+
+# Pull the API key from an environment variable
+openai.api_key = os.getenv("KIDDOM_OPENAI_API_KEY")
+
+if openai.api_key is None:
+    raise ValueError("Missing OpenAI API key from Kiddom environment.")
+
 
 # Show title and description.
 st.title("💬 Chatbot")
