@@ -13,6 +13,10 @@ if not api_key:
     st.stop()
 
 client = anthropic.Anthropic(api_key=api_key)
+from dotenv import load_dotenv
+load_dotenv()
+api_key = os.getenv("KIDDOM_ANTHROPIC_API_KEY")
+
 
 # --- Claude-based Scope & Sequence Generation ---
 def generate_units_claude(standards_df, sample_units=None, unit_count=None, group_by_theme=False):
