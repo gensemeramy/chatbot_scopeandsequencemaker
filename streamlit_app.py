@@ -12,12 +12,6 @@ if not api_key:
     st.error("Anthropic API key not found. Set KIDDOM_ANTHROPIC_API_KEY in your environment or Streamlit secrets.")
     st.stop()
 
-client = anthropic.Anthropic(api_key=api_key)
-from dotenv import load_dotenv
-load_dotenv()
-api_key = os.getenv("KIDDOM_ANTHROPIC_API_KEY")
-
-
 
 
 # --- Claude-based Scope & Sequence Generation ---
