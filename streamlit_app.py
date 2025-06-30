@@ -3,16 +3,18 @@ import pandas as pd
 import json
 import os
 import anthropic
+from dotenv import load_dotenv
 
-# --- Setup Anthropic Client from env or Streamlit secrets ---
+# --- Load environment variables ---
+load_dotenv()
+
+# --- Setup Anthropic Client from .env ---
 api_key = os.getenv("KIDDOM_ANTHROPIC_API_KEY")
 if not api_key:
-    api_key = st.secrets.get("KIDDOM_ANTHROPIC_API_KEY")
-if not api_key:
-    st.error("Anthropic API key not found. Set KIDDOM_ANTHROPIC_API_KEY in your environment or Streamlit secrets.")
+    st.error("Anthropic API key not found. Please set KIDDOM_ANTHROPIC_API_KEY in your .env file.")
     st.stop()
 
-
+client = anthropic.Anthropic(api_key=api_key)
 
 # --- Claude-based Scope & Sequence Generation ---
 def generate_units_claude(standards_df, sample_units=None, unit_count=None, group_by_theme=False):
